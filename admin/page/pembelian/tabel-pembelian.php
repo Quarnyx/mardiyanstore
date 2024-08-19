@@ -3,8 +3,11 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Username</th>
-            <th>Level</th>
+            <th>Produk</th>
+            <th>Tanggal Pembelian</th>
+            <th>Jumlah</th>
+            <th>Harga Beli</th>
+            <th>Total</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -13,7 +16,7 @@
         include "../../config.php";
 
 
-        $sql = "SELECT * FROM pengguna";
+        $sql = "SELECT * FROM v_pembelian";
         $result = $conn->query($sql);
         $no = 0;
         while ($row = $result->fetch_assoc()) {
@@ -21,15 +24,15 @@
             ?>
             <tr>
                 <td><?= $no ?></td>
-                <td><?= $row['username'] ?></td>
-                <td><?= $row['level'] ?></td>
+                <td><?= $row['nama_produk'] . ' - ' . $row['ukuran'] . ' - ' . $row['warna'] ?></td>
+                <td><?= $row['tanggal_beli'] ?></td>
+                <td><?= $row['jumlah'] ?></td>
+                <td>Rp <?= number_format($row['harga_beli'], 0, ',', '.') ?></td>
+                <td>Rp <?= number_format($row['harga_beli'] * $row['jumlah'], 0, ',', '.') ?></td>
+
                 <td>
-                    <button data-id="<?= $row['id_akun'] ?>" data-name="<?= $row['username'] ?>" id="edit"
-                        class="btn btn-primary">Edit</button>
-                    <button data-id="<?= $row['id_akun'] ?>" data-name="<?= $row['username'] ?>" id="delete"
-                        class="btn btn-danger">Delete</button>
-                    <button data-id="<?= $row['id_akun'] ?>" data-name="<?= $row['username'] ?>" id="edit-password"
-                        class="btn btn-success">Ganti Password</button>
+                    <button data-id="<?= $row['id_pembelian'] ?>" id="edit" class="btn btn-primary">Edit</button>
+                    <button data-id="<?= $row['id_pembelian'] ?>" id="delete" class="btn btn-danger">Delete</button>
                 </td>
 
 
@@ -47,7 +50,7 @@
             const name = $(this).data('name');
             $.ajax({
                 type: 'POST',
-                url: 'page/pengguna/edit-pengguna.php',
+                url: 'page/pembelian/edit-pembelian.php',
                 data: 'id=' + id + '&name=' + name,
                 success: function (data) {
                     $('.modal').modal('show');
@@ -56,32 +59,13 @@
                 }
             })
         });
-        $('#datatable').on('click', '#edit-password', function () {
-            const id = $(this).data('id');
-            const name = $(this).data('name');
-            alertify.prompt('Ganti Password ' + name, 'Masukkan Password Baru', '', function (evt, value) {
-                $.ajax({
-                    type: 'POST',
-                    url: 'proses.php?aksi=ganti-password',
-                    data: 'id=' + id + '&name=' + name + '&password=' + value,
-                    success: function (data) {
-                        alertify.success('Password Berhasil Diubah');
-                    },
-                    error: function (data) {
-                        alertify.error(data);
-                    }
-                })
-            }, function () {
-                alertify.error('Ganti password dibatalkan');
-            })
-        });
+
         $('#datatable').on('click', '#delete', function () {
             const id = $(this).data('id');
-            const name = $(this).data('name');
-            alertify.confirm('Hapus', 'Apakah anda yakin ingin menghapus data ' + name + '?', function () {
+            alertify.confirm('Hapus', 'Apakah anda yakin ingin menghapus data ?', function () {
                 $.ajax({
                     type: 'POST',
-                    url: 'proses.php?aksi=hapus-pengguna',
+                    url: 'proses.php?aksi=hapus-pembelian',
                     data: 'id=' + id,
                     success: function (data) {
                         loadTable();

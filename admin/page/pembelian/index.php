@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-12">
         <div class="page-title-box d-flex align-items-center justify-content-between">
-            <h4 class="mb-sm-0">Data Pengguna</h4>
+            <h4 class="mb-sm-0">Data Pembelian</h4>
         </div>
-        <button class="btn btn-primary" id="tambah">Tambah Akun</button>
+        <button class="btn btn-primary" id="tambah">Tambah Pembelian</button>
 
     </div>
 </div>
@@ -13,7 +13,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title">Data Pengguna</h4>
+                <h4 class="card-title">Data Pembelian</h4>
             </div>
             <div class="card-body">
 
@@ -25,7 +25,7 @@
 <!-- end row -->
 <script>
     function loadTable() {
-        $('.card-body').load('page/pengguna/tabel-pengguna.php');
+        $('.card-body').load('page/pembelian/tabel-pembelian.php');
     }
     $(document).ready(function () {
 
@@ -33,8 +33,8 @@
 
         $('#tambah').click(function () {
             $('.modal').modal('show');
-            $('.modal-title').text('Tambah Akun');
-            $('.modal-body').load('page/pengguna/tambah-pengguna.php');
+            $('.modal-title').text('Tambah Pembelian');
+            $('.modal-body').load('page/pembelian/tambah-pembelian.php');
         });
     });
 </script>

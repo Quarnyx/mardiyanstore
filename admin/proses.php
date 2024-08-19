@@ -199,4 +199,46 @@ switch ($_GET['aksi'] ?? '') {
             echo $conn->error;
         }
         break;
+    case 'tambah-pembelian':
+        $id_varian = $_POST['id_variasi'];
+        $jumlah = $_POST['jumlah'];
+        $harga_beli = $_POST['harga_beli'];
+        $tanggal_beli = $_POST['tanggal_beli'];
+        $sql = "INSERT INTO pembelian (id_variasi, jumlah, harga_beli, tanggal_beli) VALUES ('$id_varian', '$jumlah', '$harga_beli', '$tanggal_beli')";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+        } else {
+            echo "gagal";
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        break;
+    case 'hapus-pembelian':
+        $id = $_POST['id'];
+        $sql = "DELETE FROM pembelian WHERE id_pembelian = '$id'";
+        $result = $conn->query($sql);
+        if ($result) {
+            http_response_code(200);
+            echo "ok";
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        break;
+    case 'edit-pembelian':
+        $id = $_POST['id'];
+        $id_variasi = $_POST['id_variasi'];
+        $jumlah = $_POST['jumlah'];
+        $harga_beli = $_POST['harga_beli'];
+        $tanggal_beli = $_POST['tanggal_beli'];
+        $sql = "UPDATE pembelian SET id_variasi = '$id_variasi', jumlah = '$jumlah', harga_beli = '$harga_beli', tanggal_beli = '$tanggal_beli'  WHERE id_pembelian = '$id'";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            http_response_code(200);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        break;
 }

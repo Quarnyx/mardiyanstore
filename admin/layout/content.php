@@ -20,6 +20,9 @@ switch ($_GET['page'] ?? '') {
     case 'gambar-produk';
         include 'page/produk/gambar-produk.php';
         break;
+    case 'pembelian';
+        include 'page/pembelian/index.php';
+        break;
 
     default:
         include 'pages/404.php';

@@ -14,7 +14,8 @@ session_start();
     <!-- App favicon -->
     <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-
+    <!-- select2 -->
+    <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
 
 
     <!-- dark layout js -->
@@ -43,6 +44,7 @@ session_start();
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" />
     <!-- Default theme -->
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/themes/default.min.css" />
+
 
 
 

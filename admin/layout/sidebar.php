@@ -15,13 +15,13 @@
 
                 <li class="menu-title">Transaksi</li>
                 <li>
-                    <a href="index.html" class="">
+                    <a href="?page=penjualan" class="">
                         <i class="fas fa-cart-plus"></i>
                         <span>Penjualan</span>
                     </a>
                 </li>
                 <li>
-                    <a href="index.html" class="">
+                    <a href="?page=pembelian" class="">
                         <i class="fas fa-desktop"></i>
                         <span>Pembelian</span>
                     </a>
