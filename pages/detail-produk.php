@@ -69,7 +69,7 @@
                         <label class="col-xl-5 col-lg-5  col-md-6 col-6 pt-0"><strong>Warna</strong></label>
                         <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                             <div class="custom-select-form">
-                                <select class="wide">
+                                <select class="wide" id="warna">
                                     <?php
                                     $sql = "SELECT * FROM variasi_produk WHERE id_produk = " . $_GET['id'] . " GROUP BY warna";
                                     $result = $conn->query($sql);
@@ -89,9 +89,9 @@
                         <label class="col-xl-5 col-lg-5 col-md-6 col-6"><strong>Ukuran</strong></label>
                         <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                             <div class="custom-select-form">
-                                <select class="wide">
+                                <select class="wide" id="ukuran">
                                     <?php
-                                    $sql = "SELECT * FROM variasi_produk WHERE id_produk = " . $_GET['id'];
+                                    $sql = "SELECT * FROM variasi_produk WHERE id_produk = " . $_GET['id'] . " GROUP BY ukuran";
                                     $result = $conn->query($sql);
                                     if ($result->num_rows > 0) {
                                         while ($ukuran = $result->fetch_assoc()) {
@@ -109,8 +109,16 @@
                         <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>Jumlah</strong></label>
                         <div class="col-xl-4 col-lg-5 col-md-6 col-6">
                             <div class="numbers-row">
-                                <input type="text" value="1" id="harga" class="qty2" name="harga">
+                                <input type="text" value="1" id="jumlah" class="qty2" name="jumlah">
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong>Stok</strong></label>
+                        <div class="col-xl-4 col-lg-5 col-md-6 col-6">
+                            <label class="col-xl-5 col-lg-5  col-md-6 col-6"><strong id="stok">Pilih
+                                    variasi</strong></label>
+
                         </div>
                     </div>
                 </div>
@@ -119,10 +127,20 @@
                         <div class="price_main"><span class="new_price">Rp
                                 <?= number_format($row['harga_jual'], 0, ',', '.') ?></span></div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="btn_add_to_cart"><a href="#0" class="btn_1"><i class="ti-shopping-cart"></i>
-                                Keranjang</a></div>
-                    </div>
+                    <?php
+                    if (isset($_SESSION['level']) && $_SESSION['level'] == 'pelanggan') {
+                        ?>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="btn_add_to_cart"><button id="tambah-keranjang" class="btn_1"><i
+                                        class="ti-shopping-cart"></i>
+                                    Keranjang</button></div>
+                        </div>
+                    <?php } else { ?>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="btn_add_to_cart"><a href="?page=login" class="btn_1"><i class="ti-lock"></i>
+                                    Login</a></div>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
             <!-- /prod_info -->
@@ -173,3 +191,52 @@
     <!-- /container -->
 </div>
 <!-- /tab_content_wrapper -->
+<script>
+    $(document).ready(function () {
+        $("#ukuran, #warna").change(function () {
+            id_produk = <?= $_GET['id'] ?>;
+            warna = $("#warna").val();
+            ukuran = $("#ukuran").val();
+            console.log(id_produk, warna, ukuran);
+            $.ajax({
+                type: "POST",
+                url: "proses.php?aksi=cek-stok",
+                data: 'warna=' + warna + '&ukuran=' + ukuran + '&id_produk=' + id_produk,
+                success: function (data) {
+                    $("#stok").html(data);
+                    if (data == 0) {
+                        $("#tambah-keranjang").prop("disabled", true);
+                    } else {
+                        $("#tambah-keranjang").prop("disabled", false);
+                    }
+                }
+            });
+        });
+
+        $("#tambah-keranjang").click(function () {
+            id_produk = <?= $_GET['id'] ?>;
+            warna = $("#warna").val();
+            ukuran = $("#ukuran").val();
+            jumlah = $("#jumlah").val();
+            $id_akun = <?= $_SESSION['id_akun'] ?>;
+            harga_beli = <?= $row['harga_beli'] ?>;
+            harga_jual = <?= $row['harga_jual'] ?>;
+            $.ajax({
+                type: "POST",
+                url: "proses.php?aksi=tambah-keranjang",
+                data:
+                    'warna=' + warna +
+                    '&ukuran=' + ukuran +
+                    '&id_produk=' + id_produk +
+                    '&jumlah=' + jumlah +
+                    '&id_akun=' + $id_akun +
+                    '&harga_beli=' + harga_beli +
+                    '&harga_jual=' + harga_jual,
+                success: function (response) {
+                    alertify.success('Berhasil Ditambahkan Ke Keranjang');
+                    loadCart();
+                }
+            });
+        });
+    });
+</script>

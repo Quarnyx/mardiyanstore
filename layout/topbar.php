@@ -27,7 +27,7 @@
                                 <a href="?page=home">Home</a>
                             </li>
                             <li class="submenu">
-                                <a href="javascript:void(0);" class="show-submenu">Produk</a>
+                                <a href="?page=produk" class="show-submenu">Produk</a>
                                 <ul>
                                     <?php
                                     $sql = "SELECT * FROM merk";
@@ -35,7 +35,8 @@
 
                                     while ($row = mysqli_fetch_array($query)) {
                                         ?>
-                                        <li><a href="?page=produk&merk=<?= $row['id_merk'] ?>"><?= $row['nama_merk'] ?></a>
+                                        <li><a
+                                                href="?page=produk&merk=<?= $row['nama_merk'] ?>"><?= $row['nama_merk'] ?></a>
                                         </li>
                                         <?php
                                     }
@@ -69,7 +70,7 @@
                     <nav class="categories">
                         <ul class="clearfix">
                             <li><span>
-                                    <a href="#">
+                                    <a href="?page=produk">
                                         <span class="hamburger hamburger--spin">
                                             <span class="hamburger-box">
                                                 <span class="hamburger-inner"></span>
@@ -87,7 +88,7 @@
                                         while ($row = mysqli_fetch_array($query)) {
                                             ?>
                                             <li><span><a
-                                                        href="?page=produk&merk=<?= $row['id_merk'] ?>"><?= $row['nama_merk'] ?></a></span>
+                                                        href="?page=produk&merk=<?= $row['nama_merk'] ?>"><?= $row['nama_merk'] ?></a></span>
                                             </li>
                                             <?php
                                         }
@@ -102,21 +103,32 @@
                 </div>
                 <div class="col-xl-6 col-lg-7 col-md-6 d-none d-md-block">
                     <div class="custom-search-input">
-                        <input type="text" placeholder="Search over 10.000 products">
-                        <button type="submit"><i class="header-icon_search_custom"></i></button>
+                        <form action="" method="get">
+                            <input type="hidden" name="page" value="produk">
+                            <input type="text" name="search" placeholder="Cari produk">
+                            <button type="submit"><i class="header-icon_search_custom"></i></button>
+                        </form>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-2 col-md-3">
                     <ul class="top_tools">
+
                         <li>
                             <div class="dropdown dropdown-cart">
                                 <a href="cart.html" class="cart_bt"></a>
-                                <div id="cart_box" class="dropdown-menu">
+                                <?php
+                                if (isset($_SESSION['level']) && $_SESSION['level'] == 'pelanggan') {
+                                    ?>
+                                    <div id="cart_box" class="dropdown-menu">
 
-                                </div>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                             </div>
                             <!-- /dropdown-cart-->
                         </li>
+
                         <li>
                             <div class="dropdown dropdown-access">
                                 <a href="?page=login" class="access_link"><span>Akun</span></a>
@@ -155,7 +167,7 @@
                                         <div class="hamburger-inner"></div>
                                     </div>
                                 </div>
-                                Categories
+                                Kategori
                             </a>
                         </li>
                     </ul>
@@ -164,8 +176,11 @@
             <!-- /row -->
         </div>
         <div class="search_mob_wp">
-            <input type="text" class="form-control" placeholder="Search over 10.000 products">
-            <input type="submit" class="btn_1 full-width" value="Search">
+            <form action="" method="get">
+                <input type="hidden" name="page" value="produk">
+                <input type="text" class="form-control" name="search" placeholder="Cari produk">
+                <button type="submit"><i class="btn_1 full-width" value="Search"></i></button>
+            </form>
         </div>
         <!-- /search_mobile -->
     </div>

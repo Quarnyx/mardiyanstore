@@ -1,21 +1,29 @@
 <?php
-$sql = "SELECT * FROM v_produk WHERE id_merk = '$_GET[merk]'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+if (isset($_GET['merk'])) {
+    $sql = "SELECT * FROM v_produk WHERE nama_merk = '$_GET[merk]'";
+    $result = $conn->query($sql);
+    $title = $_GET['merk'];
+} elseif (isset($_GET['search'])) {
+    $sql = "SELECT * FROM v_produk WHERE nama_produk LIKE '%$_GET[search]%'";
+    $result = $conn->query($sql);
+    $title = "Hasil Pencarian" . ' ' . $_GET['search'];
+} else {
+    $sql = "SELECT * FROM v_produk";
+    $result = $conn->query($sql);
+    $title = "Produk";
 }
+
 
 ?>
 <div class="top_banner version_2">
     <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0)">
         <div class="container">
             <div class="d-flex justify-content-center">
-                <h1><?= $row['nama_merk'] ?></h1>
+                <h1><?= $title ?></h1>
             </div>
         </div>
     </div>
-    <img src="img/bg_cat_shoes.jpg" class="img-fluid" alt="">
+    <img src="img/slides/3.png" class="img-fluid" alt="">
 </div>
 <!-- /top_banner -->
 
@@ -26,10 +34,8 @@ if ($result->num_rows > 0) {
 <div class="container margin_30">
     <div class="row small-gutters">
         <?php
-        $sql = "SELECT * FROM v_thumbnailproduk WHERE id_merk = '$_GET[merk]'";
-        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_array()) {
                 ?>
                 <div class="col-6 col-md-4 col-xl-3">
                     <div class="grid_item">
@@ -47,11 +53,17 @@ if ($result->num_rows > 0) {
                         <div class="price_box">
                             <span class="new_price">Rp <?= number_format($row['harga_jual'], 0, ',', '.') ?></span>
                         </div>
-                        <ul>
-                            <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
-                                    title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
-                            </li>
-                        </ul>
+                        <?php
+                        if (isset($_SESSION['level']) && $_SESSION['level'] == 'pelanggan') {
+                            ?>
+                            <ul>
+                                <li><a href="#0" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left"
+                                        title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a>
+                                </li>
+                            </ul>
+                            <?php
+                        }
+                        ?>
                     </div>
                     <!-- /grid_item -->
                 </div>
