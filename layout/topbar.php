@@ -140,7 +140,7 @@
                                         <h6>Halo, <?= $_SESSION['username'] ?></h6>
                                         <ul>
                                             <li>
-                                                <a href="account.html"><i class="ti-user"></i>Profile Saya</a>
+                                                <a href="?page=akun"><i class="ti-user"></i>Profile Saya</a>
                                             </li>
                                             <li>
                                                 <a href="logout.php"><i class="ti-power-off"></i>Keluar</a>

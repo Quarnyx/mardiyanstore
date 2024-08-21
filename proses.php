@@ -30,6 +30,48 @@ switch ($_GET['aksi'] ?? '') {
             echo $conn->error;
         }
         break;
+    case 'edit-pelanggan':
+        $id_akun = $_POST['id_akun'];
+        $username = $_POST['email'];
+        $nama = $_POST['nama'];
+        $alamat = $_POST['alamat'];
+        $city_id = $_POST['city_id'];
+        $province_id = $_POST['province_id'];
+        $kode_pos = $_POST['kode_pos'];
+        $no_hp = $_POST['no_hp'];
+        // buat akun
+        $sql = "UPDATE pengguna SET username = '$username' WHERE id_akun = '$id_akun'";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            http_response_code(200);
+        } else {
+            echo $conn->error;
+        }
+        // update pelanggan
+        $sql = "UPDATE pelanggan SET nama_pelanggan = '$nama', alamat = '$alamat', city_id = '$city_id', province_id = '$province_id', kode_pos = '$kode_pos', no_hp = '$no_hp' WHERE id_akun = '$id_akun'";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            http_response_code(200);
+            header('Location: index.php?page=akun');
+        } else {
+            echo $conn->error;
+        }
+        break;
+    case 'ganti-password':
+        $id_akun = $_GET['id_akun'];
+        $password = md5($_POST['password']);
+        $sql = "UPDATE pengguna SET password = '$password' WHERE id_akun = '$id_akun'";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            http_response_code(200);
+        } else {
+            echo $conn->error;
+        }
+        break;
+
     case 'cek-stok':
         $ukuran = $_POST['ukuran'];
         $warna = $_POST['warna'];
