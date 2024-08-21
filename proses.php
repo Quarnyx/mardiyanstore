@@ -83,8 +83,42 @@ switch ($_GET['aksi'] ?? '') {
             http_response_code(500);
             echo $conn->error;
         }
+        break;
 
-
+    case 'pembayaran':
+        $id_akun = $_POST['id_akun'];
+        $sqlpelanggan = "SELECT id_pelanggan FROM pelanggan WHERE id_akun = '$id_akun'";
+        $querypelanggan = mysqli_query($conn, $sqlpelanggan);
+        $rowpelanggan = mysqli_fetch_assoc($querypelanggan);
+        $id_pelanggan = $rowpelanggan['id_pelanggan'];
+        $kode_penjualan = 'INV-' . rand(10000, 99099) . $id_akun;
+        // ubah status keranjang
+        $sql = "UPDATE detail_penjualan SET keranjang = '0', kode_penjualan = '$kode_penjualan' WHERE id_akun = '$id_akun' AND keranjang = '1'";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            echo "keranjang ok";
+            http_response_code(200);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        // insert ke penjualan
+        $total = $_POST['total'];
+        $tanggal_penjualan = date('Y-m-d');
+        $pengiriman = $_POST['pengiriman'];
+        $pembayaran = $_POST['pembayaran'];
+        $status = 'Ditahan';
+        $sql = "INSERT INTO penjualan (id_pelanggan, kode_penjualan, total, tanggal_penjualan, pengiriman, pembayaran, status) VALUES ('$id_pelanggan', '$kode_penjualan', '$total', '$tanggal_penjualan', '$pengiriman', '$pembayaran', '$status')";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            http_response_code(200);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        header("Location: index.php");
         break;
 
 

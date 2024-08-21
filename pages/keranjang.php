@@ -88,7 +88,7 @@ $querycart = mysqli_query($conn, $sqlcart);
                         <span>Total</span> Rp <?php echo number_format($subtotal, 0, ',', '.') ?>
                     </li>
                 </ul>
-                <a href="cart-2.html" class="btn_1 full-width cart">Pembayaran</a>
+                <a href="?page=pembayaran" class="btn_1 full-width cart">Pembayaran</a>
             </div>
         </div>
     </div>

@@ -23,6 +23,14 @@
                             <input type="password" class="form-control" name="password" id="password" value=""
                                 placeholder="Password*">
                         </div>
+                        <?php
+                        if (isset($_GET['username'])) {
+                            echo '<div class="alert alert-danger" role="alert">Username salah</div>';
+
+                        } elseif (isset($_GET['pass'])) {
+                            echo '<div class="alert alert-danger" role="alert">Password salah</div>';
+                        }
+                        ?>
                         <div class="text-center"><input type="submit" value="Log In" class="btn_1 full-width">
                         </div>
                     </form>
