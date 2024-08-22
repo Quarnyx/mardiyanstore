@@ -8,7 +8,7 @@
                         <a href="?page=home"><img src="img/logo.png" alt="" width="100"></a>
                     </div>
                 </div>
-                <nav class="col-xl-6 col-lg-7">
+                <nav class="col-xl-6 col-lg-7" style="text-align-last: center;">
                     <a class="open_close" href="javascript:void(0);">
                         <div class="hamburger hamburger--spin">
                             <div class="hamburger-box">
@@ -45,17 +45,15 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="blog.html">Tentang Kami</a>
-                            </li>
-                            <li>
-                                <a href="#0">Kontak Kami</a>
+                                <a href="?page=kontak">Kontak Kami</a>
                             </li>
                         </ul>
                     </div>
                     <!--/main-menu -->
                 </nav>
                 <div class="col-xl-3 col-lg-2 d-lg-flex align-items-center justify-content-end text-end">
-                    <a class="phone_top" href="tel://9438843343"><strong><span>Whatsapp</span>08252525255</strong></a>
+                    <a class="phone_top"
+                        href="https://wa.me/6283865007064"><strong><span>Whatsapp</span>083865007064</strong></a>
                 </div>
             </div>
             <!-- /row -->

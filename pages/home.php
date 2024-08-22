@@ -48,13 +48,13 @@
 
 <div class="container margin_60_35">
     <div class="main_title">
-        <h2>Top Selling</h2>
+        <h2>Produk Unggulan</h2>
         <span>Products</span>
         <p>Produk unggulan dan berkualitas dari kami</p>
     </div>
     <div class="row small-gutters">
         <?php
-        $sql = "SELECT * FROM v_thumbnailproduk ORDER BY id_produk DESC";
+        $sql = "SELECT * FROM v_thumbnailproduk ORDER BY id_produk DESC LIMIT 12";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -103,19 +103,15 @@
 </div>
 <!-- /container -->
 
-<div class="featured lazy" data-bg="url(img/featured_home.jpg)">
+<div class="featured lazy" data-bg="url(img/slides/1.png)">
     <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
         <div class="container margin_60">
             <div class="row justify-content-center justify-content-md-start">
                 <div class="col-lg-6 wow" data-wow-offset="150">
-                    <h3>Armor<br>Air Color 720</h3>
-                    <p>Lightweight cushioning and durable support with a Phylon midsole</p>
+                    <h3>Mardiyan<br>Shoes Store</h3>
+                    <p>Toko sepatu yang terpercaya</p>
                     <div class="feat_text_block">
-                        <div class="price_box">
-                            <span class="new_price">$90.00</span>
-                            <span class="old_price">$170.00</span>
-                        </div>
-                        <a class="btn_1" href="listing-grid-1-full.html" role="button">Shop Now</a>
+                        <a class="btn_1" href="?page=produk" role="button">Belanja Sekarang</a>
                     </div>
                 </div>
             </div>
@@ -123,37 +119,3 @@
     </div>
 </div>
 <!-- /featured -->
-
-
-
-<div class="bg_gray">
-    <div class="container margin_30">
-        <div id="brands" class="owl-carousel owl-theme">
-            <div class="item">
-                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_1.png" alt=""
-                        class="owl-lazy"></a>
-            </div><!-- /item -->
-            <div class="item">
-                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_2.png" alt=""
-                        class="owl-lazy"></a>
-            </div><!-- /item -->
-            <div class="item">
-                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_3.png" alt=""
-                        class="owl-lazy"></a>
-            </div><!-- /item -->
-            <div class="item">
-                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_4.png" alt=""
-                        class="owl-lazy"></a>
-            </div><!-- /item -->
-            <div class="item">
-                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_5.png" alt=""
-                        class="owl-lazy"></a>
-            </div><!-- /item -->
-            <div class="item">
-                <a href="#0"><img src="img/brands/placeholder_brands.png" data-src="img/brands/logo_6.png" alt=""
-                        class="owl-lazy"></a>
-            </div><!-- /item -->
-        </div><!-- /carousel -->
-    </div><!-- /container -->
-</div>
-<!-- /bg_gray -->

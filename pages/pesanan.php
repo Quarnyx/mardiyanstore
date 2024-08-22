@@ -128,7 +128,7 @@ $rowcart = mysqli_fetch_array($query);
                         <input type="text" class="form-control form-control-lg" value="<?= $rowcart['pembayaran'] ?>"
                             readonly>
                     </div>
-                    <a target="_blank" href="https://wa.me/628464464" class="btn_1 full-width cart">Konfirmasi
+                    <a target="_blank" href="https://wa.me/6283865007064" class="btn_1 full-width cart">Konfirmasi
                         Pembayaran</a>
                 </div>
             </div>
