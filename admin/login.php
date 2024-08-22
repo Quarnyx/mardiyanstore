@@ -1,7 +1,7 @@
 <?php include('layout/head.php'); ?>
 
 <body>
-    <div class="container-fluid authentication-bg overflow-hidden">
+    <div class="container-fluid overflow-hidden">
         <div class="bg-overlay"></div>
         <div class="row align-items-center justify-content-center min-vh-100">
             <div class="col-10 col-md-6 col-lg-4 col-xxl-3">
