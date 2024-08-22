@@ -241,4 +241,62 @@ switch ($_GET['aksi'] ?? '') {
             echo $conn->error;
         }
         break;
+    case 'update-status':
+        $kode_penjualan = $_POST['kode_penjualan'];
+        $status = $_POST['status'];
+        $sql = "UPDATE penjualan SET status = '$status' WHERE kode_penjualan = '$kode_penjualan'";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            http_response_code(200);
+            header('location: app.php?page=detail-penjualan&kode=' . $kode_penjualan);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        break;
+    case 'update-resi':
+        $kode_penjualan = $_POST['kode_penjualan'];
+        $resi = $_POST['resi'];
+        $sql = "UPDATE penjualan SET no_resi = '$resi' WHERE kode_penjualan = '$kode_penjualan'";
+        $result = $conn->query($sql);
+        if ($result) {
+            echo "ok";
+            http_response_code(200);
+            header('location: app.php?page=detail-penjualan&kode=' . $kode_penjualan);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        break;
+    case 'hapus-penjualan':
+        $kode = $_POST['kode'];
+        $sql = "DELETE FROM penjualan WHERE kode_penjualan = '$kode'";
+        $result = $conn->query($sql);
+        if ($result) {
+            http_response_code(200);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        $sql = "DELETE FROM detail_penjualan WHERE kode_penjualan = '$kode'";
+        $result = $conn->query($sql);
+        if ($result) {
+            http_response_code(200);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        break;
+    case 'hapus-pelanggan':
+        $id = $_POST['id'];
+        $sql = "DELETE FROM pelanggan WHERE id_akun = '$id'";
+        $result = $conn->query($sql);
+        if ($result) {
+            http_response_code(200);
+        } else {
+            http_response_code(500);
+            echo $conn->error;
+        }
+        break;
 }

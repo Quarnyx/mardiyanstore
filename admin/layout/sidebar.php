@@ -27,6 +27,20 @@
                     </a>
                 </li>
 
+                <li class="menu-title">Laporan</li>
+                <li>
+                    <a href="?page=laporan-penjualan" class="">
+                        <i class="fas fa-cart-plus"></i>
+                        <span>Laporan Penjualan</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page=laporan-pembelian" class="">
+                        <i class="fas fa-desktop"></i>
+                        <span>Laporan Pembelian</span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Data Master</li>
 
                 <li>
@@ -46,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="index.html" class="">
+                    <a href="?page=pelanggan" class="">
                         <i class="fas fa-users"></i>
                         <span>Data Pelanggan</span>
                     </a>
@@ -55,16 +69,10 @@
                 <li class="menu-title">Data Pengguna</li>
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow ">
+                    <a href="?page=pengguna">
                         <i class="fa fa-unlock-alt"></i>
                         <span>Pengguna</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="?page=pengguna"><i class="mdi mdi-checkbox-blank-circle align-middle"></i>
-                                Admin</a></li>
-                        <li><a href="auth-register.html"><i class="mdi mdi-checkbox-blank-circle align-middle"></i>
-                                Pelanggan</a></li>
-                    </ul>
                 </li>
 
 

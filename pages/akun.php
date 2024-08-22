@@ -138,7 +138,8 @@
                                         <strong><?= $rowcart['status'] ?></strong>
                                     </td>
                                     <td>
-                                        <button class="btn btn-info">Detail</button>
+                                        <a href="?page=pesanan&kode=<?= $rowcart['kode_penjualan'] ?>"
+                                            class="btn btn-info">Detail</a>
                                     </td>
                                 </tr>
                                 <?php

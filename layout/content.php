@@ -23,4 +23,7 @@ switch ($_GET['page'] ?? '') {
     case 'akun':
         include 'pages/akun.php';
         break;
+    case 'pesanan':
+        include 'pages/pesanan.php';
+        break;
 }

@@ -11,6 +11,9 @@ switch ($_GET['page'] ?? '') {
     case 'merk':
         include 'page/merk/index.php';
         break;
+    case 'stok':
+        include 'page/produk/stok.php';
+        break;
     case 'produk';
         include 'page/produk/index.php';
         break;
@@ -22,6 +25,21 @@ switch ($_GET['page'] ?? '') {
         break;
     case 'pembelian';
         include 'page/pembelian/index.php';
+        break;
+    case 'penjualan':
+        include 'page/penjualan/index.php';
+        break;
+    case 'detail-penjualan':
+        include 'page/penjualan/detail-penjualan.php';
+        break;
+    case 'laporan-penjualan':
+        include 'page/penjualan/laporan-penjualan.php';
+        break;
+    case 'laporan-pembelian':
+        include 'page/pembelian/laporan-pembelian.php';
+        break;
+    case 'pelanggan':
+        include 'page/pelanggan/index.php';
         break;
 
     default:
